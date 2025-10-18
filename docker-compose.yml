@@ -1,0 +1,26 @@
+services:
+  mongodb:
+    image: mongo:7.0
+    container_name: smartconseil-mongo
+    env_file:
+      - ./myapp/.env
+    volumes:
+      - /srv/databases/node/data:/data/db
+    networks:
+      - app-network
+
+  nodeapp:
+    image: hamdounisabri/smartconseil:1.0
+    container_name: smartconseil-app
+    env_file:
+      - ./myapp/.env
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mongodb
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
