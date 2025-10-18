@@ -10,7 +10,7 @@ services:
       - app-network
 
   nodeapp:
-    image: hamdounisabri/smartconseil:1.0
+    image: ${APP_IMAGE} 
     container_name: smartconseil-app
     env_file:
       - ./myapp/.env
